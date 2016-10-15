@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="VII-Lin" />
+
+
+
+<meta name="description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+上篇文章简单介绍了EasyUI，以及环境的搭建，这篇文章着重分享自己在项目中遇到的Combotree即组合树控件使用问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">
+<meta property="og:url" content="https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/index.html">
+<meta property="og:site_name" content="VII-Lin的修车铺">
+<meta property="og:description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+上篇文章简单介绍了EasyUI，以及环境的搭建，这篇文章着重分享自己在项目中遇到的Combotree即组合树控件使用问题">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/combotree.png">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/4.png">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/5.png">
+<meta property="og:updated_time" content="2016-10-15T02:38:36.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">
+<meta name="twitter:description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+上篇文章简单介绍了EasyUI，以及环境的搭建，这篇文章着重分享自己在项目中遇到的Combotree即组合树控件使用问题">
+<meta name="twitter:image" content="http://oezlx5jyd.bkt.clouddn.com/combotree.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="VII-Lin的修车铺" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/2013.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题 | VII-Lin的修车铺</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?09c5d4daddb9b6250ba93075257e58a2";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2012.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">VII-Lin</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">修车，养性</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="https://accounts.google.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/411805576/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" href="http://im.qq.com/" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://muhlenxi.com/">muhlenxi</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">java后端,EasyUI,jQuery,js</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">VII-Lin</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2012.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">VII-Lin</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">修车，养性</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="https://accounts.google.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/411805576/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="http://im.qq.com/" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-浅谈EasyUI走过的坑(二)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/14/浅谈EasyUI走过的坑(二)/" class="article-date">
+      <time datetime="2016-10-14T06:38:58.000Z" itemprop="datePublished">2016-10-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/经验分享/">经验分享</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/">EasyUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。</p>
+<p>上篇文章简单介绍了EasyUI，以及环境的搭建，这篇文章着重分享自己在项目中遇到的<code>Combotree</code>即<code>组合树</code>控件使用问题</p>
+<p><excerpt in="" index="" |="" 首页摘要=""><br><a id="more"></a></excerpt></p>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+</the></blockquote>
+<h2 id="了解Combotree"><a href="#了解Combotree" class="headerlink" title="了解Combotree"></a>了解Combotree</h2><blockquote>
+<ul>
+<li>扩展自 <code>$.fn.combo.defaults</code> 和 <code>$.fn.tree.defaults</code>。</li>
+<li>通过$.fn.combotree.defaults 重写默认的 defaults。</li>
+<li>组合树（combotree）把选择控件和下拉树结合起来。它与<code>组合框</code></li>
+<li><code>（combobox）</code>相似，不同的是把列表替换成树组件。<code>组合树</code></li>
+<li><code>（combotree）</code>支持带有用于多选的树状态复选框的树。</li>
+</ul>
+</blockquote>
+<p>下图为包含多选框的<code>Combotree</code></p>
+<center><img src="http://oezlx5jyd.bkt.clouddn.com/combotree.png" alt=""></center>
+
+<p>上面是引用了<a href="http://www.jeasyui.net/" target="_blank" rel="external">jQuery-EasyUI中文网</a>的<code>Combotree简介</code>。简单说就是<code>Combo(组合)</code>的扩展，与<code>（combobox）</code>很类似，但用法上比<code>（combobox）</code>复杂，实际项目中调试<code>组合树</code>也相对耗时间。</p>
+<p>其中<code>事件</code>，<code>方法</code>的详细说明就不在这里列举，放上<a href="http://www.jeasyui.net/plugins/170.html" target="_blank" rel="external">Combotree官方文档</a>，可以 更详细的认识。</p>
+<h2 id="项目中combotree遇到的问题"><a href="#项目中combotree遇到的问题" class="headerlink" title="项目中combotree遇到的问题"></a>项目中combotree遇到的问题</h2><p>由于项目中通常是多个控件一块使用，比较常见的组合有<code>（combotree）组合树</code>，<code>（combobox）组合框</code>，<code>（Datagrid）数据网格</code>，<code>（Linkbutton）链接按钮</code>等等，这就容易造成最近项目中遇到的如下问题。</p>
+<h3 id="相关联的控件加载速度不同，引起的问题"><a href="#相关联的控件加载速度不同，引起的问题" class="headerlink" title="相关联的控件加载速度不同，引起的问题"></a>相关联的控件加载速度不同，引起的问题</h3><p>下面分别是<code>Datagrid数据网格</code>，<code>combotree组合树</code>的标签创建格式</p>
+<pre><code>&lt;table class=&quot;easyui-datagrid&quot; style=&quot;width:400px;height:250px&quot;
+data-options=&quot;url:&apos;datagrid_data.json&apos;,fitColumns:true,singleSelect:true&quot;&gt;
+&lt;thead&gt;
+    &lt;tr&gt;
+        &lt;th data-options=&quot;field:&apos;code&apos;,width:100&quot;&gt;Code&lt;/th&gt;
+        &lt;th data-options=&quot;field:&apos;name&apos;,width:100&quot;&gt;Name&lt;/th&gt;
+        &lt;th data-options=&quot;field:&apos;price&apos;,width:100,align:&apos;right&apos;&quot;&gt;Price&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;/table&gt;
+</code></pre><center><em>Datagrid数据网格table加载格式</em></center>
+
+<pre><code>&lt;select id=&quot;cc&quot; class=&quot;easyui-combotree&quot; style=&quot;width:200px;&quot;
+    data-options=&quot;url:&apos;get_data.php&apos;,required:true&quot;&gt;
+&lt;/select&gt;
+</code></pre><center><em>combotree组合树标记创建格式</em></center>
+
+<p>可以看到两个控件的数据来源都是<code>data-options</code>后跟上<code>url</code>来获取的<code>json</code>数据，可以是本地的数据源，也可以是后台传过来的<code>json</code>串，那么在默认情况下进入页面时，两个控件都会请求各自的<code>url</code>来加载，如果两个控件之间没有关联性，可能不太会影响显示结果，但如果两个或多个控件之间存在关联，就会造成些未知的问题。</p>
+<p>举个栗子，就拿公司最近的项目来说吧有个页面的逻辑为<code>所属机构（combotree）</code>下关联<code>所属台区（combobox）</code>，以及一个<code>含下级（checkbox）</code>标志来决定<code>所属终端（Datagrid）</code>的显示，其中与所属终端有直接关联的只有所属台区，而台区与所属机构，含下级有关联。</p>
+<p>当选中<code>所属机构</code>，以及是否选中<code>含下级</code>，才能决定<code>所属台区</code>的内容，而<code>所属终端</code>的查询条件是根据<code>所属台区</code>走的，这样就存在一个隐患:全部控件在页面加载时同时请求，但当树的内容过多，还没能加载完毕，数据表格的请求已经在后台开始处理了。后续出的各种处理肯定是不对的。</p>
+<p>后来的解决方案是，当树的内容加载完毕（这里的树内容不多，采用全部加载，如果树的分支很多就要采用<code>异步加载</code>），<code>Ajax请求</code>加载相对应的<code>台区</code>（通常<code>checkbox</code>的响应速度是很快的，当树加载完毕，它肯定加载完成了），监听<code>台区</code>加载完成后，再去获取台区内容，加载<code>所属终端</code>，这样一来由于加载速度引起的问题也就迎刃而解了。</p>
+<blockquote>
+<p>具体的处理逻辑见下面的代码块：</p>
+</blockquote>
+<pre><code>&lt;td class=&quot;td-title&quot;&gt;所属机构：&lt;/td&gt;
+&lt;td class=&quot;td-content&quot;&gt;&lt;input id=&quot;f_tID&quot;
+    class=&quot;easyui-combotree&quot; style=&quot;width:150px;height:26px;&quot;
+    data-options=&quot;url:&apos;../treeJ_queryAgencyTreeForUser&apos;,
+    method:&apos;post&apos;,
+    editable:false,
+    onLoadSuccess:function() {
+        var f_tID = $(&apos;#hidF_tID&apos;).val();
+        var tree = $(&apos;#f_tID&apos;).combotree(&apos;tree&apos;);
+        if(f_tID == &apos;&apos;){
+            f_tID = tree.tree(&apos;getRoot&apos;).id;
+        }
+        var node = tree.tree(&apos;find&apos;, f_tID);
+        $(&apos;#f_tID&apos;).combotree(&apos;setValue&apos;, f_tID);
+        $(&apos;#datainfo&apos;).datagrid({url:&apos;terminalJ_getTerminalMngInfo&apos;});
+    },
+    onChange:function(newValue,oldValue){
+       $(&apos;#f_tID&apos;).combotree(&apos;setValue&apos;,newValue);
+       if(newValue!=oldValue){
+           $(&apos;#f_transformerID&apos;).combobox({
+            url:&apos;terminalJ_getTransformer&apos;,valueField:&apos;id&apos;,
+            textField:&apos;f_transformerName&apos;,
+            method:&apos;post&apos;,
+            valueField:&apos;id&apos;,
+            panelHeight:&apos;auto&apos;,
+            editable:false,
+            queryParams:{
+                underFlg: $(&apos;#underFlg&apos;).is(&apos;:checked&apos;),
+                f_tID: newValue
+               },
+               onLoadSuccess:function(data) {
+                var f_transformerID = $(&apos;#hidF_transformerID&apos;).val();
+                if(f_transformerID != &apos;&apos;) {
+                    $(&apos;#f_transformerID&apos;).combobox(&apos;setValue&apos;,f_transformerID)
+                }
+            }
+           });
+               }else{
+                return;                                               
+               }
+        }
+&quot;&gt;
+&lt;/td&gt;
+&lt;td class=&quot;td-title&quot;&gt;&lt;input id=&quot;underFlg&quot; type=&quot;checkbox&quot;
+    checked=&quot;checked&quot;&gt;含下级&lt;/td&gt;
+&lt;td class=&quot;td-title&quot;&gt;&amp;nbsp;&amp;nbsp; 用电台区：&lt;/td&gt;
+&lt;td class=&quot;td-content&quot;&gt;&lt;input id=&quot;f_transformerID&quot;
+    class=&quot;easyui-combobox&quot; style=&quot;width:120px; height:26px;&quot;
+    data-options=&quot;&quot;,
+    method:&apos;post&apos;,
+    valueField:&apos;id&apos;,
+    textField:&apos;f_transformerName&apos;,
+    panelHeight:&apos;auto&apos;
+&quot;&gt;
+&lt;/td&gt;
+</code></pre><center><em>处理的部分代码块</em></center>
+
+<blockquote>
+<p>具体说明如下：</p>
+</blockquote>
+<p><code>onLoadSuccess</code>为<code>Tree</code>的事件，<code>combotree</code>也同样继承了，跟字面意思一样，当树的内容加载完成后会触发该方法。</p>
+<p>这里的处理为，当机构树加载完成后，再给数据表格<code>url</code>，数据表格才会去后台请求数据（这里页面第一次访问，选中的树为根节点，即所属台区为全部台区，后台也是同样处理查询全部的请求）。</p>
+<p><code>onChange</code>为<code>Combo</code>的事件，<code>combotree</code>也同样继承了，当树所选的内容改变后会触发该方法。</p>
+<p>这里的处理为监听所选树的内容，当内容确实是改变后，根据<code>含下级</code>标志，以及所选<code>机构ID</code>异步请求<code>台区</code>的内容，并且是<code>台区</code>组合框加载完毕后，根据隐藏域的值，选中台区。</p>
+<blockquote>
+<p><code>含下级</code>单选框的监听放到了如下的js代码块中：</p>
+</blockquote>
+<pre><code>//监听含下级选中框，每改变一次，重新请求刷新所属台区的内容
+  $(&quot;#underFlg&quot;).change(function() {
+    $(&apos;#f_transformerID&apos;).combobox({
+        url : &apos;terminalJ_getTransformer&apos;,
+        valueField : &apos;id&apos;,
+        textField : &apos;f_transformerName&apos;,
+        method : &apos;post&apos;,
+        valueField : &apos;id&apos;,
+        panelHeight : &apos;auto&apos;,
+        editable : false,
+        queryParams : {
+            underFlg : $(&apos;#underFlg&apos;).is(&apos;:checked&apos;),
+            f_tID : $(&apos;#f_tID&apos;).combotree(&apos;getValue&apos;)
+        }
+    });
+});
+</code></pre><p>同样是一样的思路，监听含下级选中框，改变后会将当前的选中状态以及机构ID传到后台，根据传回的<code>json</code>异步刷新<code>台区</code>下拉框。</p>
+<blockquote>
+<p>总结如下：</p>
+<p>同类加载速度引起的问题，都是这种解决思路：让相关联的控件的第一环先加载完毕，再去加载下一环，以此类推。如果加载数据量过多，（例如<code>combotree</code>这一类）又对加载的速度有要求的情况下，可以使用<code>异步加载</code>，例如首次访问<code>combotree</code>只加载根层树节点，<code>Datagrid</code>进行<code>分页</code>只显示前50条数据等等。</p>
+</blockquote>
+<h3 id="树的数据加载与后台处理问题"><a href="#树的数据加载与后台处理问题" class="headerlink" title="树的数据加载与后台处理问题"></a>树的数据加载与后台处理问题</h3><p>下面展示的是树的数据格式：</p>
+<pre><code>[{
+&quot;id&quot;:1,
+&quot;text&quot;:&quot;Folder1&quot;,
+&quot;iconCls&quot;:&quot;icon-save&quot;,
+&quot;children&quot;:[{
+    &quot;text&quot;:&quot;File1&quot;,
+    &quot;checked&quot;:true
+},{
+    &quot;text&quot;:&quot;Books&quot;,
+    &quot;state&quot;:&quot;open&quot;,
+    &quot;attributes&quot;:{
+        &quot;url&quot;:&quot;/demo/book/abc&quot;,
+        &quot;price&quot;:100
+    },
+    &quot;children&quot;:[{
+        &quot;text&quot;:&quot;PhotoShop&quot;,
+        &quot;checked&quot;:true
+    },{
+        &quot;id&quot;: 8,
+        &quot;text&quot;:&quot;Sub Bookds&quot;,
+        &quot;state&quot;:&quot;closed&quot;
+    }]
+}]
+    },{
+        &quot;text&quot;:&quot;Languages&quot;,
+        &quot;state&quot;:&quot;closed&quot;,
+        &quot;children&quot;:[{
+        &quot;text&quot;:&quot;Java&quot;
+        },{
+        &quot;text&quot;:&quot;C#&quot;
+    }]
+}]
+</code></pre><p>树的数据结构都是采用一个数组中存放多个对象来实现，对象中可以使用<code>children</code>继续包括子对象，<code>text</code>即为对象的文本内容，<code>state</code>为其中的节点状态<code>closed</code>为关闭状态，<code>open</code>即为打开状态，<code>iconCls</code>为节点的图标，<code>attributes</code>为自定义的一些属性，<code>id</code>为远程数据需要的定位标志。</p>
+<p>也同样可以使用<code>url</code>来加载服务器端传来的<code>json</code>数据</p>
+<blockquote>
+<p>下图为项目中机构树数据库表部分结构，<code>ID</code>为自身id，<code>F_FID</code>为其直接的父id，<code>F_PATH</code>为<code>含下级</code>查询时提供方便，通过自己的<code>F_PATH</code>可清楚的获得自己所处的层级，以及自己上层的所有父节点。</p>
+</blockquote>
+<center><img src="http://oezlx5jyd.bkt.clouddn.com/4.png" alt=""></center><br><center><em>用于测试的数据</em></center>
+
+<blockquote>
+<ol>
+<li>在后台获取整棵树的结构，先可以取出根节点，即<code>F_FID</code>为空的节点id，然后依次取出第一层节点，编写回调函数即可全部取出所有的子节点，整个结构存储到集合中，再通过<code>Struts2</code>或者<code>SpringMVC</code>返回<code>json</code>类型的数据，传入到对应的<code>url</code>中。</li>
+<li>在查询含下级的情况，先传到后台对应的id，以及含下级的标志，当选中含下级时，可编写类似下面的sql，及查询自己的下级所有节点信息，并加上自己的节点信息，这里假设对应的<code>ID</code>为<code>297ed61e577568f7015775c4594b0003</code>，查询的结果为3条记录，如下图：</li>
+</ol>
+</blockquote>
+<pre><code>SELECT
+    ID,
+    F_FID,
+    F_NODECODE,
+    F_PATH
+FROM
+    T_BUS_AGENCYTREE
+WHERE
+    F_PATH LIKE &apos;%297ed61e577568f7015775c4594b0003%&apos;
+    OR ID = &apos;297ed61e577568f7015775c4594b0003&apos;;
+</code></pre><center><img src="http://oezlx5jyd.bkt.clouddn.com/5.png" alt=""></center><br><center><em>满足条件的查询结果</em></center>
+
+<p>可以看出在树的结构表中添加了<code>F_PATH</code>这个字段，<code>sql</code>编写与操作整个树也相对容易了很多。</p>
+<h3 id="combotree的取值-写值问题"><a href="#combotree的取值-写值问题" class="headerlink" title="combotree的取值/写值问题"></a>combotree的取值/写值问题</h3><p>通常使用jQuery操作标签，使用<code>$(&quot;#id&quot;).val()</code>即可取出对象的值，这个取值命令在<code>tree</code>以及<code>combotree</code>中并不可用。</p>
+<p>标签中加入如下内容，表明前后台传值为<code>id</code>，而前台显示是采用<code>text</code>。</p>
+<pre><code>data-options=
+&quot;
+    url:&apos;../treeJ_queryAgencyTreeForUser&apos;,
+    method:&apos;post&apos;,
+    valueField:&apos;id&apos;,
+    textField:&apos;text&apos;,
+    editable:false
+&quot;
+</code></pre><p><code>$(&#39;#id&#39;).combotree(&#39;getValue&#39;)</code>这样的写法，取出树中的值<code>id</code>，显示即为对应的<code>text</code>的值，并且通常给后台传的也只有<code>id</code>才有意义。</p>
+<p><code>$(&#39;#id&#39;).combotree(&#39;setValue&#39;，XXX)</code>这样可以将<code>id</code>的值写入，在存在该id的情况下，树节点会自动选中对应的该id的<code>text</code>的值。</p>
+<p>对于如下数据，当<code>setValue</code>为<code>11</code>时，树会默认选中<code>Java</code>。</p>
+<pre><code>[{
+    id: 1,
+    text: &apos;Languages&apos;,
+    children: [{
+        id: 11,
+        text: &apos;Java&apos;
+        },{
+        id: 12,
+        text: &apos;C++&apos;
+    }]
+}]
+</code></pre><p>又例如下面的操作：</p>
+<pre><code>onLoadSuccess:function() 
+{
+
+     var f_tID = &apos;&lt;s:property value=&apos;f_tID&apos;/&gt;&apos;;
+     if(f_tID != &apos;&apos;) {
+         $(&apos;#f_tID&apos;).combotree(&apos;setValue&apos;,f_tID)
+     } else {
+            var tree = $(&apos;#f_tID&apos;).combotree(&apos;tree&apos;)
+            $(&apos;#f_tID&apos;).combotree(&apos;setValue&apos;,tree.tree(&apos;getRoot&apos;).id)
+        }
+}
+</code></pre><blockquote>
+<p>这里需要说明一点，对于查询条件，用户一般是喜欢自动保存的，例如我选中一个树节点进行修改的操作后，返回主页面我希望同时树还是选中当前的节点，方便我进行对比查看。</p>
+</blockquote>
+<p>为了这种需求，我在后台将选中的树<code>id</code>存入了值域，到页面中借助<code>Struts2</code>的<code>S标签：&lt;s:property value=&#39;f_tID&#39;/&gt;</code>进行取值，当值域有对应的值，我就给<code>combotree</code>附上取出的id，如果没有存值（一般为第一次进入页面）默认选中根节点。</p>
+<p>选中根节点需要用到<code>tree</code>属性，<code>$(&#39;#f_tID&#39;).combotree(&#39;tree&#39;).tree(&#39;getRoot&#39;).id</code>即可获取当前树的根节点id，在树结构加载完毕后选中根节点的逻辑就完成了。</p>
+<p><code>combotree</code>中使用中容易出问题的地方，以及解决的思路在这里粗略的列举出来，当后续遇到了<code>combotree</code>其他的使用问题，会及时更新。</p>
+<p>嗯，总之这是一篇比较严肃的文章<code>(╯‵□′)╯︵┻━┻</code></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/14/浅谈EasyUI走过的坑(二)/">闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">VII-Lin</a></p>
+        <p><span>发布时间:</span>2016-10-14, 14:38:58</p>
+        <p><span>最后更新:</span>2016-10-15, 10:38:36</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/14/浅谈EasyUI走过的坑(二)/" title="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/　　作者: VII-Lin" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/13/浅谈EasyUI走过的坑(一)/">
+                    闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#了解Combotree"><span class="toc-number">1.</span> <span class="toc-text">了解Combotree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目中combotree遇到的问题"><span class="toc-number">2.</span> <span class="toc-text">项目中combotree遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关联的控件加载速度不同，引起的问题"><span class="toc-number">2.1.</span> <span class="toc-text">相关联的控件加载速度不同，引起的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树的数据加载与后台处理问题"><span class="toc-number">2.2.</span> <span class="toc-text">树的数据加载与后台处理问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#combotree的取值-写值问题"><span class="toc-number">2.3.</span> <span class="toc-text">combotree的取值/写值问题</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题　| VII-Lin的修车铺　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/14/浅谈EasyUI走过的坑(二)/" data-title="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题" data-url="https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"411805576"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/13/浅谈EasyUI走过的坑(一)/" title="下一篇: 闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/14/浅谈EasyUI走过的坑(二)/">闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/浅谈EasyUI走过的坑(一)/">闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/new-article/">windows下用Hexo创建个人博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 VII-Lin
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
