@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/combotree.png">
 <meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/4.png">
 <meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/5.png">
-<meta property="og:updated_time" content="2016-10-15T12:02:53.204Z">
+<meta property="og:updated_time" content="2016-10-15T02:38:36.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">
 <meta name="twitter:description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
@@ -506,7 +506,7 @@ data-options=&quot;url:&apos;datagrid_data.json&apos;,fitColumns:true,singleSele
 
 <blockquote>
 <ol>
-<li>在后台获取整棵树的结构，先可以取出根节点，即<code>F_FID</code>为空的节点id，然后依次取出第一层节点，编写迭代函数即可全部取出所有的子节点，整个结构存储到集合中，再通过<code>Struts2</code>或者<code>SpringMVC</code>返回<code>json</code>类型的数据，传入到对应的<code>url</code>中。</li>
+<li>在后台获取整棵树的结构，先可以取出根节点，即<code>F_FID</code>为空的节点id，然后依次取出第一层节点，编写回调函数即可全部取出所有的子节点，整个结构存储到集合中，再通过<code>Struts2</code>或者<code>SpringMVC</code>返回<code>json</code>类型的数据，传入到对应的<code>url</code>中。</li>
 <li>在查询含下级的情况，先传到后台对应的id，以及含下级的标志，当选中含下级时，可编写类似下面的sql，及查询自己的下级所有节点信息，并加上自己的节点信息，这里假设对应的<code>ID</code>为<code>297ed61e577568f7015775c4594b0003</code>，查询的结果为3条记录，如下图：</li>
 </ol>
 </blockquote>
@@ -577,7 +577,7 @@ WHERE
         <p><span>本文标题:</span><a href="/2016/10/14/浅谈EasyUI走过的坑(二)/">闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">VII-Lin</a></p>
         <p><span>发布时间:</span>2016-10-14, 14:38:58</p>
-        <p><span>最后更新:</span>2016-10-15, 20:02:53</p>
+        <p><span>最后更新:</span>2016-10-15, 10:38:36</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/14/浅谈EasyUI走过的坑(二)/" title="闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/</a>
             <span class="copy-path" data-clipboard-text="原文: https://411805576.github.io/2016/10/14/浅谈EasyUI走过的坑(二)/　　作者: VII-Lin" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
