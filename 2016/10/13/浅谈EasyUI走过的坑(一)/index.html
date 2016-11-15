@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="VII-Lin" />
+
+
+
+<meta name="description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+细数使用EasyUI几个月以来，伴随着几个项目的上线部署，也算对EasyUI有所了解了，就分享一下在项目中遇到的坑，也算给自己一个总结，给别人一个参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI">
+<meta property="og:url" content="https://411805576.github.io/2016/10/13/浅谈EasyUI走过的坑(一)/index.html">
+<meta property="og:site_name" content="VII-Lin的修车铺">
+<meta property="og:description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+细数使用EasyUI几个月以来，伴随着几个项目的上线部署，也算对EasyUI有所了解了，就分享一下在项目中遇到的坑，也算给自己一个总结，给别人一个参考。">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/1.png">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://oezlx5jyd.bkt.clouddn.com/3.png">
+<meta property="og:updated_time" content="2016-10-15T02:40:17.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI">
+<meta name="twitter:description" content="版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。
+细数使用EasyUI几个月以来，伴随着几个项目的上线部署，也算对EasyUI有所了解了，就分享一下在项目中遇到的坑，也算给自己一个总结，给别人一个参考。">
+<meta name="twitter:image" content="http://oezlx5jyd.bkt.clouddn.com/1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="VII-Lin的修车铺" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/2013.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI | VII-Lin的修车铺</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?09c5d4daddb9b6250ba93075257e58a2";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/2012.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">VII-Lin</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">修车，养性</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="https://accounts.google.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/411805576/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" href="http://im.qq.com/" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心路历程/">心路历程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常记录/">日常记录</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://muhlenxi.com/">muhlenxi</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">java后端,EasyUI,jQuery,js</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">VII-Lin</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/2012.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">VII-Lin</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">修车，养性</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="https://accounts.google.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/411805576/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="http://im.qq.com/" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-浅谈EasyUI走过的坑(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/13/浅谈EasyUI走过的坑(一)/" class="article-date">
+      <time datetime="2016-10-13T12:41:58.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/经验分享/">经验分享</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/">EasyUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>版权声明：本文为VII-Lin原创文章，转载请注明出处，未经允许不得转载。</p>
+<p>细数使用<code>EasyUI</code>几个月以来，伴随着几个项目的上线部署，也算对<code>EasyUI</code>有所了解了，就分享一下在项目中遇到的坑，也算给自己一个总结，给别人一个参考。</p>
+<p><excerpt in="" index="" |="" 首页摘要=""><br><a id="more"></a></excerpt></p>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+</the></blockquote>
+<h2 id="了解EasyUI"><a href="#了解EasyUI" class="headerlink" title="了解EasyUI"></a>了解EasyUI</h2><blockquote>
+<p> easyui是一种基于jQuery的用户界面插件集合。</p>
+<p> easyui为创建现代化，互动，JavaScript应用程序，提供必要的功能。</p>
+<p> 使用easyui你不需要写很多代码，你只需要通过编写一些简单HTML标记，就可以定义用户界面。</p>
+<p> easyui是个完美支持HTML5网页的完整框架。</p>
+<p> easyui节省您网页开发的时间和规模。</p>
+<p> easyui很简单但功能强大的。</p>
+</blockquote>
+<p>以上的内容是摘自<a href="http://www.jeasyui.net/" target="_blank" rel="external">jQuery-EasyUI中文网</a>的<code>EasyUI 简介</code>。</p>
+<p>确实作为一个后端的前台框架，<code>EasyUI</code>特效不及前端框架那么绚丽，但绝对能够满足后台页面的<code>简单</code>，<code>稳定</code>。</p>
+<p>由于<code>EasyUI</code>是基于<code>jQuery</code>框架开发的组件，那么就相应的继承了<code>jQuery</code>操作<code>JavaScript</code>对象极其方便，正如<code>jQuery</code>最著名的一句话<em><code>write less,do more(写得更少,做得更多)</code></em>，<code>EasyUI</code>很轻量级，但功能绝不简单。</p>
+<h2 id="EasyUI参考手册"><a href="#EasyUI参考手册" class="headerlink" title="EasyUI参考手册"></a>EasyUI参考手册</h2><p>有一段时间，我使用的EasyUI的API文档来作为开发参考手册，后来发现API文档内容并不是很全，同事推荐我去<a href="http://www.jeasyui.net/" target="_blank" rel="external">jQuery-EasyUI中文网</a>查看<code>教程</code>，注意第一个坑出现了。</p>
+<p>不建议去查看官网最醒目的<strong><em>EasyUI demo</em></strong>，而是将页面翻到最后，查看最下面的<em>所有的 EasyUI 插件</em></p>
+<p>好长一段时间，都一直在查看demo，仅仅只是demo，所有的方法描述，以及属性参数都没有接触，真是捉急啊。终于有一天发现同事竟然看的是最后的<code>所有的EasyUI插件</code>，【看表情：（一脸黑线】。</p>
+<blockquote>
+<p>下图为首页进去最醒目的就是<code>查看EsayUI demo</code>，点击那个进去看到的内容是不全面的，不建议参考。</p>
+</blockquote>
+<center><img src="http://oezlx5jyd.bkt.clouddn.com/1.png" alt=""></center>
+
+<center><em>不完整的内容</em></center>
+
+
+
+<blockquote>
+<p>拖动到最后，如下图的<code>在线实例</code>才是完整的，一般查看方法属性都在这里。</p>
+</blockquote>
+<center><img src="http://oezlx5jyd.bkt.clouddn.com/2.png" alt=""></center>
+
+<center><em>完整的内容</em></center>
+
+
+<blockquote>
+<p>坑爹的地方在于，点击上方的<code>查看EasyUI demo</code>显示结果与下方的显示结果一样，但实际的内容只有演示的demo。自己尝试下，就能知道其中的细节了，这里就不多赘述了。</p>
+</blockquote>
+<p>具体的语法规则就不多介绍了，官网相当的全面，只需了解<code>jQuery</code>用法，上手也是很快速的。</p>
+<p>这里放出我自己使用的离线参考手册<a href="http://pan.baidu.com/s/1mhGe1qo" target="_blank" rel="external">点击下载</a>，其中的<code>exe</code>软件用起来还是很方便的。</p>
+<h2 id="EasyUI简单使用"><a href="#EasyUI简单使用" class="headerlink" title="EasyUI简单使用"></a>EasyUI简单使用</h2><blockquote>
+<ul>
+<li>下载js源文件<a href="http://www.jeasyui.com/download/index.php" target="_blank" rel="external">EasyUI</a>和<a href="http://jquery.com/" target="_blank" rel="external">jQuery</a>。</li>
+<li>如下配置，导入CSS与js文件到你的页面，<strong>注意<code>路径</code>以及<code>使用版本</code>导入顺序，<code>jQuery</code>的js要在<code>EasyUI</code>前面</strong>，因为<code>EasyUI</code>要引用<code>jQuery</code>的js文件。</li>
+</ul>
+</blockquote>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/default/easyui.css&quot;&gt;   
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/icon.css&quot;&gt;   
+&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery-1.7.2.min.js&quot;&gt;&lt;/script&gt;   
+&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery.easyui.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><blockquote>
+<ul>
+<li>在页面中添加如下代码，即可生成一个折叠面板</li>
+</ul>
+</blockquote>
+<pre><code>&lt;div id=&quot;p&quot; class=&quot;easyui-panel&quot; style=&quot;width:500px;height:200px;padding:10px;&quot;   
+    title=&quot;My Panel&quot; iconCls=&quot;icon-save&quot; collapsible=&quot;true&quot;&gt;   
+The panel content    
+&lt;/div&gt;
+</code></pre><blockquote>
+<ul>
+<li>显示效果如下：</li>
+<li>到这里基本环境也就搭建好了，其他具体的基础用法查看文档手册或者度娘。</li>
+</ul>
+</blockquote>
+<center><img src="http://oezlx5jyd.bkt.clouddn.com/3.png" alt=""></center>
+
+<p><code>EasyUI</code>基本的介绍以及环境搭建，就结束了，更多的使用上容易出错的内容会在后续的文章中分篇列举。</p>
+<p>嗯，总之这是一篇比较严肃的文章<code>(╯‵□′)╯︵┻━┻</code></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/13/浅谈EasyUI走过的坑(一)/">闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">VII-Lin</a></p>
+        <p><span>发布时间:</span>2016-10-13, 20:41:58</p>
+        <p><span>最后更新:</span>2016-10-15, 10:40:17</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/13/浅谈EasyUI走过的坑(一)/" title="闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI">https://411805576.github.io/2016/10/13/浅谈EasyUI走过的坑(一)/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://411805576.github.io/2016/10/13/浅谈EasyUI走过的坑(一)/　　作者: VII-Lin" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/14/浅谈EasyUI走过的坑(二)/">
+                    闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/12/new-article/">
+                    windows下用Hexo创建个人博客
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#了解EasyUI"><span class="toc-number">1.</span> <span class="toc-text">了解EasyUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EasyUI参考手册"><span class="toc-number">2.</span> <span class="toc-text">EasyUI参考手册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EasyUI简单使用"><span class="toc-number">3.</span> <span class="toc-text">EasyUI简单使用</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI　| VII-Lin的修车铺　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/13/浅谈EasyUI走过的坑(一)/" data-title="闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI" data-url="https://411805576.github.io/2016/10/13/浅谈EasyUI走过的坑(一)/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"411805576"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/14/浅谈EasyUI走过的坑(二)/" title="上一篇: 闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/12/new-article/" title="下一篇: windows下用Hexo创建个人博客">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/15/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/浅谈EasyUI走过的坑(三)/">闲聊EasyUI以及项目中踩过的坑(三)：EasyUI中零碎问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/日常记录/">日常记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/14/浅谈EasyUI走过的坑(二)/">闲聊EasyUI以及项目中踩过的坑(二)：EasyUI Combotree 组合树中常见问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/浅谈EasyUI走过的坑(一)/">闲聊EasyUI以及项目中踩过的坑(一)：初识EasyUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/new-article/">windows下用Hexo创建个人博客</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 VII-Lin
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+             post: ".article-entry a[href], .copyright a[href]", 
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+             articleNav: "#article-nav a, #post-nav-button a", 
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
